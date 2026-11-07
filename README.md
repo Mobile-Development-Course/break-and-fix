@@ -20,19 +20,51 @@ A tiny game: tap the green button to earn a coin. Every coin makes the orange bo
 2. Look at the game in the **Device Simulator** (Window → General → Device Simulator). Try a phone with a camera hole and an old 16:9 phone.
 3. Build it to a real Android phone (File → Build Profiles → Android → Build And Run).
 
-For each bug, write down:
+There are six bugs. Each card below tells you what a player would see, and how to see it yourself. Your job is to find the cause.
 
-| What you saw | Which setting or line causes it | The fix |
+### 1. The coin counter disappears
+
+On a phone with a camera hole or a notch, the coin counter at the top is hidden behind the camera.
+
+**See it:** Device Simulator, pick a phone with a camera hole.
+
+### 2. The game looks different on every phone
+
+On one phone the button and the text are big, on another they are tiny.
+
+**See it:** Device Simulator, switch between a small old phone and a big new one. Watch the button.
+
+### 3. Your thumb misses the button
+
+Even when it looks fine on the screen, the button is hard to hit.
+
+**See it:** on a real phone, tap the button 10 times fast with your thumb. How many taps missed?
+
+### 4. The game opens sideways
+
+On the phone, the game starts in landscape, and turning the phone doesn't help.
+
+**See it:** build it to a real phone.
+
+### 5. It installs on one phone, but not the other
+
+The build works on a new phone and fails to install on an older one.
+
+**See it:** build to both phones in your pair. Check each phone's Android version (Settings → About phone). If both run Android 15 or newer you won't see this one, so borrow an older phone from another pair.
+
+### 6. Your neighbour's game kills yours
+
+Install your build, then your neighbour's build, on the same phone. Only one game is left: the second one replaces the first, or fails to install.
+
+**See it:** two laptops, one phone.
+
+### Write it down
+
+For each card:
+
+| Card | Which setting or line causes it | The fix |
 | --- | --- | --- |
-| | | |
-
-Hints, if you're stuck:
-
-- Look at the Canvas and its Canvas Scaler.
-- Look at Edit → Project Settings → Player → Android tab.
-- Install your build and your neighbour's build on the same phone. What happens?
-- Did it install on every phone in your pair?
-- Can you hit the button with your thumb, on every phone?
+| 1 | | |
 
 Fix all six, build again, and show the fixed game running on a phone.
 
