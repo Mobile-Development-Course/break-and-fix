@@ -59,13 +59,25 @@ public static class PerformanceSceneBuilder
 
     // ---------- import settings ----------
 
+    // Fixed. The picture is still a 4096 file (the artist's original), but it imports the way a
+    // phone needs it: at most 2048 (a phone screen is about 1080 × 2400), compressed with ASTC
+    // on Android, no mipmaps (a UI picture is never drawn small), and no Read/Write (that keeps a
+    // second copy in CPU memory, for scripts that read pixels, and nothing here does).
+    // About 85 MB before, about 2 MB after.
     static void SetBackgroundImport(TextureImporter importer)
     {
         importer.spritePixelsPerUnit = 100;
-        importer.maxTextureSize = 4096;
-        importer.textureCompression = TextureImporterCompression.Uncompressed;
-        importer.mipmapEnabled = true;
-        importer.isReadable = true;
+        importer.maxTextureSize = 2048;
+        importer.textureCompression = TextureImporterCompression.Compressed;
+        importer.mipmapEnabled = false;
+        importer.isReadable = false;
+        importer.SetPlatformTextureSettings(new TextureImporterPlatformSettings
+        {
+            name = "Android",
+            overridden = true,
+            maxTextureSize = 2048,
+            format = TextureImporterFormat.ASTC_6x6,
+        });
     }
 
     static void SetItemImport(TextureImporter importer)

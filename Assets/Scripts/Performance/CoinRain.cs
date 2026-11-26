@@ -25,8 +25,11 @@ public class CoinRain : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            // Half coins, half gems, mixed so the rain looks even: coin, gem, coin, gem...
-            ItemKind kind = i % 2 == 0 ? ItemKind.Coin : ItemKind.Gem;
+            // Fixed: all the coins first, then all the gems. The positions are random, so the rain
+            // still looks mixed, but the Canvas can now draw all coins in one batch and all gems in
+            // another: 2 draws instead of one for every place a coin and a gem overlap.
+            // Pack both sprites into one Sprite Atlas and it's 1 draw, in any order.
+            ItemKind kind = i < count / 2 ? ItemKind.Coin : ItemKind.Gem;
 
             var go = new GameObject(kind.ToString(), typeof(RectTransform), typeof(Image), typeof(RainItem));
             var rt = (RectTransform)go.transform;
