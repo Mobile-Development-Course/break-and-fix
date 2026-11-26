@@ -11,6 +11,7 @@ One Unity project full of small broken games. Each scene is one exercise with pl
 | Scene | Exercise |
 | --- | --- |
 | `01_ShipToPhone` | Six bugs that only show up on real phones |
+| `02_Performance` | Three performance problems: a stutter, too many draw calls, a texture that eats memory |
 
 ## 01_ShipToPhone
 
@@ -68,4 +69,42 @@ For each card:
 
 Fix all six, build again, and show the fixed game running on a phone.
 
-**After the exercise:** the fixed game and the answers are on the `solution` branch (`git checkout solution`, then read `SOLUTION.md`). Try it yourself first.
+## 02_Performance
+
+A win screen: hundreds of coins and gems rain down, with a line of counts at the top and an FPS counter in the corner. It looks fine. It isn't.
+
+1. **Tools → Break and Fix → Create 02_Performance scene.** Do this once: it draws the art, builds the scene and opens it. After that, open `Assets/Generated/02_Performance.unity`. (`Assets/Generated` is made on your computer and never committed, so `git pull` stays clean.)
+2. Press **Play**. Watch the FPS counter, then use the tools on each card.
+3. Optional, on a phone: File → Build Profiles → **Scene List**: add the open scene and tick only `02_Performance`. Tick **Development Build** and **Autoconnect Profiler**, then **Build And Run**. Player Settings are shared with `01_ShipToPhone`: if you didn't fix those, first run `git checkout origin/solution -- ProjectSettings`.
+
+There are three problems. Each card says what a player would notice and which tool shows it. Your job is to find the cause, fix it, and prove the fix with a number.
+
+### 1. It hitches every few seconds
+
+The coins fall smoothly, then the whole game catches for a moment. Again and again, and worse on an old phone.
+
+**See it:** Window → Analysis → **Profiler** → CPU Usage. Click a normal frame (not a spike), switch the bottom pane to Hierarchy and sort by **GC Alloc**. A frame in the middle of play should say 0 B.
+
+### 2. Hundreds of coins, hundreds of draws
+
+Two kinds of picture on the screen, many copies of each, and the phone gets slow and warm.
+
+**See it:** Game view → **Stats** → Batches. Then Window → Analysis → **Frame Debugger** → Enable: how many draws does the coin rain take, and why can't they be combined?
+
+### 3. A simple picture eats the memory
+
+The game is tiny, but it takes a lot of memory and starts slowly on an old phone.
+
+**See it:** select each texture in `Assets/Generated/02_Performance` and read the size under the Inspector preview (switch the platform to Android first). Or capture a snapshot in the **Memory Profiler** package.
+
+### Write it down
+
+| Card | Number before | Cause (script and line, or setting) | The fix | Number after |
+| --- | --- | --- | --- | --- |
+| 1 | | | | |
+| 2 | | | | |
+| 3 | | | | |
+
+Don't change Project Settings for this exercise: the problems are all in the scene, its scripts and its art.
+
+**After each exercise:** the fixed games and the answers are on the `solution` branch (`git checkout solution`, then read `SOLUTION.md`). Try it yourself first.

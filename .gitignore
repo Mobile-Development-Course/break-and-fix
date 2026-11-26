@@ -32,3 +32,7 @@ crashlytics-build.properties
 # Secrets: never commit signing keys
 *.keystore
 *.jks
+
+# Made by the exercise builders (Tools → Break and Fix), on each computer
+/[Aa]ssets/Generated/
+/[Aa]ssets/Generated.meta
